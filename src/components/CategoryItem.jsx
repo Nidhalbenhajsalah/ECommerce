@@ -2,7 +2,7 @@
 import { styled } from '@mui/material/styles';
 import ButtonBase from '@mui/material/ButtonBase';
 import Typography from '@mui/material/Typography';
-
+import { Link } from 'react-router-dom';
 
 const Container = styled('span')({
   top: 50,
@@ -98,22 +98,24 @@ const ImageMarked = styled('span')(({ theme }) => ({
 export const CategoryItem = ({ item }) => {
   return (
     <Container>
-      <ImageButton focusRipple>
-        <Image src={item.img} />
-        <ImageBackdrop className="MuiImageBackdrop-root" />
-        <Info>
-          <Typography sx={{
-            color: 'white', marginBottom: '20px', position: 'relative',
-            p: 4,
-            pt: 2,
-            pb: (theme) => `calc(${theme.spacing(1)})`,
-          }}>
-            {item.title}
-            <Button>SHOP NOW</Button>
-            <ImageMarked className="MuiImageMarked-root" />
-          </Typography>
-        </Info>
-      </ImageButton>
+      <Link to={`/products/${item.cat}`}>
+        <ImageButton focusRipple>
+          <Image src={item.img} />
+          <ImageBackdrop className="MuiImageBackdrop-root" />
+          <Info>
+            <Typography sx={{
+              color: 'white', marginBottom: '20px', position: 'relative',
+              p: 4,
+              pt: 2,
+              pb: (theme) => `calc(${theme.spacing(1)})`,
+            }}>
+              {item.title}
+              <Button>SHOP NOW</Button>
+              <ImageMarked className="MuiImageMarked-root" />
+            </Typography>
+          </Info>
+        </ImageButton>
+      </Link>
     </Container>
   )
 }

@@ -1,11 +1,12 @@
 import { Send } from "@material-ui/icons";
 import styled from "styled-components";
+import Button from '@mui/material/Button';
 
 
 const Container = styled('div')({
 
   height: '60vh',
-  backgroundColor: '#fcf5f5',
+  backgroundColor: '#f5fbfd',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
@@ -46,13 +47,7 @@ const Input = styled('input')({
 })
 
 
-const Button = styled('button')({
 
-  flex: 1,
-  border: 'none',
-  backgroundColor: 'teal',
-  color: 'white',
-})
 
 
 const Newsletter = () => {

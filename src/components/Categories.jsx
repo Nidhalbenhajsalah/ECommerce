@@ -1,9 +1,10 @@
 import styled from "styled-components"
 import { categories } from "../data"
 import { CategoryItem } from "./CategoryItem"
-
+import { Typography } from '@mui/material'
+import { Box } from '@mui/system'
+import Divider from '@mui/material/Divider';
 const Container = styled.div`
-    display: flex;
     padding: 20px;
     justify-content: space-between;
 
@@ -11,9 +12,19 @@ const Container = styled.div`
 const Categories = () => {
     return (
         <Container>
-            {categories.map(item => (
-                <CategoryItem item={item} />
-            ))}
+            <Divider sx={{ marginTop: '4%', }}>
+                <Typography sx={{ fontSize: '40px' }}>CATEGORIES</Typography>
+            </Divider>
+            <Box sx={{ display: 'flex', marginBottom: '2%' }}>
+                {categories.map(item => (
+                    <CategoryItem item={item} />
+                ))}
+
+            </Box>
+            <Divider sx={{ marginTop: '15%', }}>
+                <Typography sx={{ fontSize: '40px' }}>TREND</Typography>
+            </Divider>
+
         </Container>
     )
 }

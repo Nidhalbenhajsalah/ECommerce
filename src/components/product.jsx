@@ -1,88 +1,66 @@
 
 import styled from 'styled-components'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
-import SearchOutlinedIcon from '@mui/icons-material/SearchOutlined';
-import FavoriteBorderOutlinedIcon from '@mui/icons-material/FavoriteBorderOutlined';
+import ImageList from '@mui/material/ImageList';
+import ImageListItem from '@mui/material/ImageListItem';
+import ImageListItemBar from '@mui/material/ImageListItemBar';
+import IconButton from '@mui/material/IconButton';
+import VisibilityOutlinedIcon from '@mui/icons-material/VisibilityOutlined';
+import { Box } from '@mui/system';
+import { popularProducts } from '../data'
 
-const Info = styled.div`
-  opacity: 0;
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.2);
-  z-index: 3;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.5s ease;
-  cursor: pointer;
-`;
-
-const Container = styled.div`
-  flex: 1;
-  margin: 5px;
-  min-width: 280px;
-  height: 350px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #f5fbfd;
-  position: relative;
-  &:hover ${Info}{
-    opacity: 1;
-  }
-`;
-
-const Circle = styled.div`
-  width: 200px;
-  height: 200px;
-  border-radius: 50%;
-  background-color: white;
-  position: absolute;
-`;
-
-const Image = styled.img`
-  height: 75%;
-  z-index: 2;
-`;
-
-const Icon = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  background-color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 10px;
-  transition: all 0.5s ease;
-  &:hover {
-    background-color: #e9f5f5;
-    transform: scale(1.1);
-  }
-`;
+import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 
-const product = ({ item }) => {
-    return (
-        <Container>
-            <Circle />
-            <Image src={item.img} />
-            <Info>
-                <Icon>
-                    <ShoppingCartOutlinedIcon />
-                </Icon>
-                <Icon>
-                    <SearchOutlinedIcon />
-                </Icon>
-                <Icon>
-                    <FavoriteBorderOutlinedIcon />
-                </Icon>
-            </Info>
-        </Container>
-    )
+
+
+const Container = styled('div')({
+
+  flex: 1,
+  margin: ' 5px',
+  minWidth: '280px',
+  height: '350px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  backgroundColor: '#f5fbfd',
+  position: 'relative',
+  marginTop: '5%',
+})
+
+
+
+
+
+
+
+const product = ({ filteredProducts }) => {
+  return (
+    <Box sx={{ width: '100 %', height: '100%', marginTop: '5%', }} >
+      <ImageList variant="masonry" cols={3} gap={8}>
+        {filteredProducts.map((item) => (
+          <ImageListItem key={item.img}>
+            <img
+              src={`${item.img}?w=248&fit=crop&auto=format`}
+              srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
+              alt={item.title}
+              loading="lazy"
+            />
+            <ImageListItemBar
+              title={item.title + item.id}
+              actionIcon={
+                <IconButton sx={{ color: 'rgba(255, 255, 255, 0.54)' }}>
+                  <ShoppingCartOutlinedIcon />
+                  <VisibilityOutlinedIcon />
+                </IconButton>
+              }
+            />
+          </ImageListItem>
+        ))}
+      </ImageList>
+    </Box >
+
+  )
 }
 
 export default product

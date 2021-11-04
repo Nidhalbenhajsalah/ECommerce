@@ -8,9 +8,13 @@ import Button from '@mui/material/Button';
 import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import Stack from '@mui/material/Stack';
+import Divider from '@mui/material/Divider';
 
 const Container = styled('div')({
-    height: '60px'
+    marginTop: '1.5%',
+    height: '60px',
+    marginBottom: '5%'
+
 })
 
 
@@ -65,6 +69,7 @@ const MenuItem = styled('div')({
 function Navbar() {
     return (
         <Container>
+            <Divider></Divider>
             <Wrapper>
                 <Left>
                     <SearchContainer>
@@ -88,6 +93,7 @@ function Navbar() {
 
                 </Right>
             </Wrapper>
+            <Divider></Divider>
         </Container>
     )
 }

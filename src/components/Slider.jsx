@@ -25,8 +25,10 @@ const Container = styled('div')({
     display: 'flex',
     position: 'relative',
     overflow: 'hidden',
-    border: 'solid',
-    borderColor: 'white'
+    borderWidth: 'thin',
+    borderTop: '',
+    borderColor: 'rgb(77, 89, 110)'
+
 
 })
 
