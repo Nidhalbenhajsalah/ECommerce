@@ -2,15 +2,9 @@ import styled from 'styled-components'
 import Product from '../components/product'
 import { Box } from '@mui/system'
 import { useState, useEffect } from 'react';
-import product from '../components/product';
 import axios from 'axios'
 
-const Container = styled.div`
-    padding-left:20px;
-    padding-right:20px;
-    flex-wrap:wrap;
-   
-`
+
 const Products = ({ cat, filters, sort }) => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([])
@@ -41,8 +35,10 @@ const Products = ({ cat, filters, sort }) => {
             {/* {popularProducts.map((item) => (
                 <Product item={item} key={item.id} />
             ))} */}
-            <Product filteredProducts={filteredProducts} />
-
+            {cat
+                ? <Product filteredProducts={filteredProducts} />
+                : <Product products={products} />
+            }
         </Box>
     )
 }

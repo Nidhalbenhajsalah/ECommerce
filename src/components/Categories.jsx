@@ -13,7 +13,7 @@ const Categories = () => {
     return (
         <Container>
             <Divider sx={{ marginTop: '4%', }}>
-                <Typography sx={{ fontSize: '40px' }}>CATEGORIES</Typography>
+                <Typography variant='h4'>CATEGORIES</Typography>
             </Divider>
             <Box sx={{ display: 'flex', marginBottom: '2%' }}>
                 {categories.map(item => (
@@ -22,10 +22,10 @@ const Categories = () => {
 
             </Box>
             <Divider sx={{ marginTop: '15%', }}>
-                <Typography sx={{ fontSize: '40px' }}>TREND</Typography>
+                <Typography variant='h4' >TREND</Typography>
             </Divider>
 
-        </Container>
+        </Container >
     )
 }
 

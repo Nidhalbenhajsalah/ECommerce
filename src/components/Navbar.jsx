@@ -9,6 +9,8 @@ import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Container = styled('div')({
     marginTop: '1.5%',
@@ -67,6 +69,8 @@ const MenuItem = styled('div')({
 
 
 function Navbar() {
+    const quantity = useSelector(state => state.cart.quantity)
+
     return (
         <Container>
             <Divider></Divider>
@@ -85,11 +89,13 @@ function Navbar() {
                         <Button variant="outlined" startIcon={<AppRegistrationSharpIcon style={{ fontSize: '16' }} />}>Register</Button>
                         <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>Sign In</Button>
                     </Stack>
-                    <MenuItem>
-                        <Badge badgeContent={4} color="primary">
-                            <ShoppingCartOutlinedIcon />
-                        </Badge>
-                    </MenuItem>
+                    <Link to='/cart'>
+                        <MenuItem>
+                            <Badge badgeContent={quantity} color="primary">
+                                <ShoppingCartOutlinedIcon />
+                            </Badge>
+                        </MenuItem>
+                    </Link>
 
                 </Right>
             </Wrapper>
