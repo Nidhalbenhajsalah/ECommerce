@@ -7,8 +7,11 @@ import StripeCheckout from "react-stripe-checkout";
 import { useEffect, useState } from "react";
 import { userRequest } from '../requestMethods'
 import { useHistory } from "react-router";
+import AddCircleOutlineSharpIcon from '@mui/icons-material/AddCircleOutlineSharp';
+import { addProduct } from "../redux/cartRedux";
+import { useDispatch } from "react-redux";
 
-const KEY = process.env.REACT_STRIPE_KEY;
+const KEY = process.env.PUBLIC_STRIPE_KEY;
 
 const Container = styled.div``;
 
@@ -161,6 +164,8 @@ const Cart = () => {
   const cart = useSelector((state) => state.cart);
   const [stripeToken, setSripeToken] = useState(null);
   const history = useHistory()
+  const [quantity, setQuantity] = useState();
+  const dispatch = useDispatch();
 
   const onToken = (token) => {
     setSripeToken(token);
@@ -180,6 +185,8 @@ const Cart = () => {
     }
     stripeToken && makeRequest();
   }, [stripeToken, cart.total, history])
+
+
 
   return (
     <Container>
@@ -209,13 +216,13 @@ const Cart = () => {
                     </ProductId>
                     <ProductColor color={product.color} />
                     <ProductSize>
-                      <b>Size:</b> {product.size}
+                      <b>Size:</b>{product.size}
                     </ProductSize>
                   </Details>
                 </ProductDetail>
                 <PriceDetail>
                   <ProductAmountContainer>
-                    <Add />
+                    <AddCircleOutlineSharpIcon />
                     <ProductAmount>{product.quantity}</ProductAmount>
                     <Remove />
                   </ProductAmountContainer>
@@ -224,11 +231,12 @@ const Cart = () => {
               </Product>))}
             <Hr />
           </Info>
+
           <Summary>
             <SummaryTitle>ORDER SUMMARY</SummaryTitle>
             <SummaryItem>
               <SummaryItemText>Subtotal</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total} </SummaryItemPrice>
             </SummaryItem>
             <SummaryItem>
               <SummaryItemText>Estimated Shipping</SummaryItemText>
@@ -240,7 +248,7 @@ const Cart = () => {
             </SummaryItem>
             <SummaryItem type="total">
               <SummaryItemText>Total</SummaryItemText>
-              <SummaryItemPrice>$ 80</SummaryItemPrice>
+              <SummaryItemPrice>$ {cart.total}</SummaryItemPrice>
             </SummaryItem>
             <StripeCheckout
               name="MyShop"
@@ -249,7 +257,7 @@ const Cart = () => {
               description={`Your total is $${cart.total}`}
               amount={cart.total * 100}
               token={onToken}
-              stripeKey={process.env.PUBLIC_STRIPE_KEY}
+              stripeKey={KEY}
             >
 
               <Button>CHECKOUT NOW</Button>

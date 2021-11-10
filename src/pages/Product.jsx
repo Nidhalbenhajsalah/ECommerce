@@ -6,7 +6,7 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import { addProduct } from "../redux/cartRedux";
+import { addProduct, removeProduct, emptyCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
 
 const Container = styled.div``;
@@ -154,6 +154,10 @@ const Product = () => {
     dispatch(addProduct({ ...product, quantity, color, size }));
   }
 
+  const handleEmptyCart = () => {
+    dispatch(emptyCart(product));
+  }
+
   return (
     <Container>
       <Navbar />
@@ -190,6 +194,7 @@ const Product = () => {
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick} >ADD TO CART</Button>
+            <Button onClick={handleEmptyCart} >Empty Cart</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

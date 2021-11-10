@@ -55,4 +55,12 @@ router.post("/login", async (req, res) => {
     }
 });
 
+router.get("/logout", async (req, res) => {
+    try {
+        res.status(200).json("Logged out successfully!");
+    } catch (err) {
+        res.status(500).json(err);
+    }
+});
+
 module.exports = router;

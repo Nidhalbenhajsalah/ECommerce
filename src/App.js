@@ -7,6 +7,7 @@ import ProductList from './pages/ProductList';
 import Register from './pages/Register';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const theme = createTheme({
   palette: {
@@ -22,7 +23,7 @@ const theme = createTheme({
 
 
 function App() {
-  const user = true
+  const user = useSelector((state) => state.user.currentUser);
   return (
 
     <ThemeProvider theme={theme}>

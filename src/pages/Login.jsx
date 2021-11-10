@@ -1,5 +1,14 @@
 import styled from "styled-components";
-
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { login } from "../redux/apiCalls";
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 
 const Container = styled.div`
   width: 100vw;
@@ -40,15 +49,19 @@ const Input = styled.input`
   padding: 10px;
 `;
 
-const Button = styled.button`
-  width: 40%;
-  border: none;
-  padding: 15px 20px;
-  background-color: teal;
-  color: white;
-  cursor: pointer;
-  margin-bottom: 10px;
-`;
+// const Button = styled.button`
+//   width: 40%;
+//   border: none;
+//   padding: 15px 20px;
+//   background-color: teal;
+//   color: white;
+//   cursor: pointer;
+//   margin-bottom: 10px;
+//   &:disabled {
+//     color: gren;
+//     cursor: not-allowed;
+//   }
+// `;
 
 const Link = styled.a`
   margin: 5px 0px;
@@ -57,21 +70,39 @@ const Link = styled.a`
   cursor: pointer;
 `;
 
+const Error = styled.span`
+  color: red;
+  `
+
 const Login = () => {
-    return (
-        <Container>
-            <Wrapper>
-                <Title>SIGN IN</Title>
-                <Form>
-                    <Input placeholder="username" />
-                    <Input placeholder="password" />
-                    <Button>LOGIN</Button>
-                    <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
-                    <Link>CREATE A NEW ACCOUNT</Link>
-                </Form>
-            </Wrapper>
-        </Container>
-    );
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const { isFetching, error } = useSelector(state => state.user);
+
+  const handleClick = (e) => {
+    e.preventDefault();
+    login(dispatch, { username, password });
+  };
+  return (
+    <Container>
+      <Wrapper>
+        <Title>SIGN IN</Title>
+        <Form>
+          <Input placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <Input placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <Button onClick={handleClick} disabled={isFetching}>LOGIN</Button>
+          {error && <Error>Something went wrong</Error>}
+          <Link>DO NOT YOU REMEMBER THE PASSWORD?</Link>
+          <Link>CREATE A NEW ACCOUNT</Link>
+        </Form>
+      </Wrapper>
+    </Container>
+  );
 };
 
 export default Login;

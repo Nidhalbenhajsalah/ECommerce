@@ -9,8 +9,10 @@ import AppRegistrationSharpIcon from '@mui/icons-material/AppRegistrationSharp';
 import AssignmentIndOutlinedIcon from '@mui/icons-material/AssignmentIndOutlined';
 import Stack from '@mui/material/Stack';
 import Divider from '@mui/material/Divider';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { logout } from "../redux/apiCalls";
+
 
 const Container = styled('div')({
     marginTop: '1.5%',
@@ -70,6 +72,12 @@ const MenuItem = styled('div')({
 
 function Navbar() {
     const quantity = useSelector(state => state.cart.quantity)
+    const dispatch = useDispatch();
+
+    // const handleClick = (e) => {
+    //     e.preventDefault();
+    //     logout(dispatch, {});
+    // };
 
     return (
         <Container>
@@ -87,7 +95,9 @@ function Navbar() {
                 <Right>
                     <Stack direction="row" spacing={1.5}>
                         <Button variant="outlined" startIcon={<AppRegistrationSharpIcon style={{ fontSize: '16' }} />}>Register</Button>
-                        <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>Sign In</Button>
+
+                        <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>LOGIN</Button>
+                        <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>LOGOUT</Button>
                     </Stack>
                     <Link to='/cart'>
                         <MenuItem>
