@@ -6,8 +6,11 @@ import styled from "styled-components";
 import Footer from "../components/Footer";
 import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
-import { addProduct, removeProduct, emptyCart } from "../redux/cartRedux";
+import { addProduct, emptyCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
+import ToggleButton from '@mui/material/ToggleButton';
+import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
+
 
 const Container = styled.div``;
 
@@ -126,6 +129,7 @@ const Product = () => {
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
   const dispatch = useDispatch();
+  const [alignment, setAlignment] = useState('web');
 
 
   useEffect(() => {
@@ -133,6 +137,8 @@ const Product = () => {
       try {
         const res = await publicRequest.get("/products/find/" + id)
         setProduct(res.data);
+        setSize(res.data.size)
+        setColor(res.data.color)
       }
       catch {
 
@@ -155,8 +161,12 @@ const Product = () => {
   }
 
   const handleEmptyCart = () => {
-    dispatch(emptyCart(product));
-  }
+    dispatch(emptyCart());
+  };
+
+  const handleChange = (event, newAlignment) => {
+    setAlignment(newAlignment);
+  };
 
   return (
     <Container>
@@ -172,12 +182,21 @@ const Product = () => {
           </Desc>
           <Price>$ {product.price}</Price>
           <FilterContainer>
-            <Filter>
+            {/* <Filter>
               <FilterTitle>Color</FilterTitle>
               {product.color?.map((color) => (
                 <FilterColor color={color} key={color} onClick={() => setColor(color)} />
               ))}
-            </Filter>
+            </Filter> */}
+            <ToggleButtonGroup
+              color='secondary'
+              value={alignment}
+              exclusive
+              onChange={handleChange}
+            >
+              {product.color?.map((color) => (<ToggleButton value={color} style={{ color: color }}>{color}</ToggleButton>))}
+
+            </ToggleButtonGroup>
             <Filter>
               <FilterTitle>Size</FilterTitle>
               <FilterSize onChange={(e) => setSize(e.target.value)}>
@@ -194,7 +213,7 @@ const Product = () => {
               <Add onClick={() => handleQuantity("inc")} />
             </AmountContainer>
             <Button onClick={handleClick} >ADD TO CART</Button>
-            <Button onClick={handleEmptyCart} >Empty Cart</Button>
+            <Button onClick={handleEmptyCart}>EMPTY CART</Button>
           </AddContainer>
         </InfoContainer>
       </Wrapper>

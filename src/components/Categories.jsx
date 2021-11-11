@@ -17,7 +17,7 @@ const Categories = () => {
             </Divider>
             <Box sx={{ display: 'flex', marginBottom: '2%' }}>
                 {categories.map(item => (
-                    <CategoryItem item={item} />
+                    <CategoryItem item={item} key={item} />
                 ))}
 
             </Box>
