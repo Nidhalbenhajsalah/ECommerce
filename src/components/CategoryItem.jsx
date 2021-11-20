@@ -53,9 +53,8 @@ const Button = styled('button')({
 const ImageButton = styled(ButtonBase)(({ theme }) => ({
   position: 'relative',
   height: '100%',
-  // objectFit: 'cover',
   [theme.breakpoints.down('sm')]: {
-    width: '100% !important', // Overrides inline-style
+    width: '100% !important',
     height: '100%',
   },
   '&:hover, &.Mui-focusVisible': {
@@ -97,12 +96,12 @@ const ImageMarked = styled('span')(({ theme }) => ({
 
 export const CategoryItem = ({ item }) => {
   return (
-    <Container>
+    <Container sx={{ margin: "0 5% 2.5% 5%" }}>
       <Link to={`/products/${item.cat}`}>
         <ImageButton focusRipple>
           <Image src={item.img} />
           <ImageBackdrop className="MuiImageBackdrop-root" />
-          <Info>
+          <Info style={{ justifyContent: "space-evenly" }}>
             <Typography sx={{
               color: 'white', marginBottom: '20px', position: 'relative',
               p: 4,

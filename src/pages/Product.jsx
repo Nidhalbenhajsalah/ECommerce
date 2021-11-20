@@ -8,15 +8,24 @@ import Navbar from "../components/Navbar";
 import Newsletter from "../components/Newsletter";
 import { addProduct, emptyCart } from "../redux/cartRedux";
 import { useDispatch } from "react-redux";
-import ToggleButton from '@mui/material/ToggleButton';
-import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
-
+import Box from '@mui/material/Box';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+import FormControl from '@mui/material/FormControl';
+import Select from '@mui/material/Select';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
+import RemoveShoppingCartIcon from '@mui/icons-material/RemoveShoppingCart';
+import Button from '@mui/material/Button';
+import Avatar from '@mui/material/Avatar';
+import Paper from '@mui/material/Paper';
 
 const Container = styled.div``;
 
 const Wrapper = styled.div`
   padding: 50px;
   display: flex;
+  justify-content: space-between;
+  align-items: center;
 
 `;
 
@@ -51,51 +60,17 @@ const Price = styled.span`
 `;
 
 const FilterContainer = styled.div`
-  width: 50%;
-  margin: 30px 0px;
-  display: flex;
-  justify-content: space-between;
-
-`;
-
-const Filter = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const FilterTitle = styled.span`
-  font-size: 20px;
-  font-weight: 200;
-`;
-
-const FilterColor = styled.div`
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background-color: ${(props) => props.color};
-  margin: 0px 5px;
-  cursor: pointer;
-`;
-
-const FilterSize = styled.select`
-  margin-left: 10px;
-  padding: 5px;
-`;
-
-const FilterSizeOption = styled.option``;
-
-const AddContainer = styled.div`
-  width: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-
+  // width: 100%;
+  // display: flex;
+  // justify-content: space-between;
+  // margin-top: 5%;
 `;
 
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;
   font-weight: 700;
+  
 `;
 
 const Amount = styled.span`
@@ -109,16 +84,6 @@ const Amount = styled.span`
   margin: 0px 5px;
 `;
 
-const Button = styled.button`
-  padding: 15px;
-  border: 2px solid teal;
-  background-color: white;
-  cursor: pointer;
-  font-weight: 500;
-  &:hover{
-      background-color: #f8f4f4;
-  }
-`;
 
 const Product = () => {
   const location = useLocation();
@@ -129,7 +94,6 @@ const Product = () => {
   const [color, setColor] = useState('');
   const [size, setSize] = useState('');
   const dispatch = useDispatch();
-  const [alignment, setAlignment] = useState('web');
 
 
   useEffect(() => {
@@ -164,59 +128,65 @@ const Product = () => {
     dispatch(emptyCart());
   };
 
-  const handleChange = (event, newAlignment) => {
-    setAlignment(newAlignment);
-  };
 
   return (
     <Container>
       <Navbar />
-      <Wrapper>
-        <ImgContainer>
-          <Image src={product.img} />
-        </ImgContainer>
-        <InfoContainer>
-          <Title>{product.title}</Title>
-          <Desc>
-            {product.desc}
-          </Desc>
-          <Price>$ {product.price}</Price>
-          <FilterContainer>
-            {/* <Filter>
-              <FilterTitle>Color</FilterTitle>
-              {product.color?.map((color) => (
-                <FilterColor color={color} key={color} onClick={() => setColor(color)} />
-              ))}
-            </Filter> */}
-            <ToggleButtonGroup
-              color='secondary'
-              value={alignment}
-              exclusive
-              onChange={handleChange}
-            >
-              {product.color?.map((color) => (<ToggleButton value={color} style={{ color: color }}>{color}</ToggleButton>))}
-
-            </ToggleButtonGroup>
-            <Filter>
-              <FilterTitle>Size</FilterTitle>
-              <FilterSize onChange={(e) => setSize(e.target.value)}>
-                {product.size?.map((size) => (
-                  <FilterSizeOption key={size}>{size}</FilterSizeOption>
-                ))}
-              </FilterSize>
-            </Filter>
-          </FilterContainer>
-          <AddContainer>
-            <AmountContainer>
-              <Remove onClick={() => handleQuantity("dec")} />
-              <Amount>{quantity}</Amount>
-              <Add onClick={() => handleQuantity("inc")} />
-            </AmountContainer>
-            <Button onClick={handleClick} >ADD TO CART</Button>
-            <Button onClick={handleEmptyCart}>EMPTY CART</Button>
-          </AddContainer>
-        </InfoContainer>
-      </Wrapper>
+      <Paper elevation={6}>
+        <Wrapper>
+          <ImgContainer>
+            <Image src={product.img} />
+          </ImgContainer>
+          <InfoContainer>
+            <Title>{product.title}</Title>
+            <Desc>
+              {product.desc}
+            </Desc>
+            <Price>$ {product.price}</Price>
+            <FilterContainer style={{ marginTop: "5%", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr", gridColumnGap: "0.5%", alignItems: "center", margin: "0 5% 0 5%" }}>
+              <FormControl>
+                <InputLabel>Color</InputLabel>
+                <Select
+                  value={color}
+                  onChange={(e) => setColor(e.target.value)}
+                  label="Color"
+                >
+                  {product.color?.map((color) => (
+                    <MenuItem value={color} sx={{ backgroundColor: "white" }}>
+                      <Box sx={{ width: "20px", height: "20px", borderRadius: "50%", backgroundColor: color }} > </Box>
+                    </MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <FormControl>
+                <InputLabel>Size</InputLabel>
+                <Select
+                  value={size}
+                  onChange={(e) => setSize(e.target.value)}
+                  label="Size"
+                >
+                  {product.size?.map((size) => (
+                    <MenuItem value={size}>{size}</MenuItem>
+                  ))}
+                </Select>
+              </FormControl>
+              <AmountContainer>
+                <Remove
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("dec")} />
+                <Avatar
+                  sx={{ bgcolor: "black" }}
+                >{quantity}</Avatar>
+                <Add
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("inc")} />
+              </AmountContainer>
+              <Button variant="outlined" onClick={handleClick} startIcon={<AddShoppingCartIcon />} >Add</Button>
+              <Button variant="outlined" onClick={handleEmptyCart} startIcon={<RemoveShoppingCartIcon />}>EMPTY</Button>
+            </FilterContainer>
+          </InfoContainer>
+        </Wrapper>
+      </Paper>
       <Newsletter />
       <Footer />
     </Container>

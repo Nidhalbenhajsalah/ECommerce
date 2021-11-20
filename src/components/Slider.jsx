@@ -20,15 +20,10 @@ const useStyles = makeStyles({
 
 const Container = styled('div')({
 
-    witdh: '100%',
-    height: '70vh',
-    display: 'flex',
+    witdh: '80vw',
+    height: '70%',
     position: 'relative',
-    overflow: 'hidden',
-    borderWidth: 'thin',
-    borderTop: '',
-    borderColor: 'rgb(77, 89, 110)'
-
+    marginLeft: "8%"
 
 })
 
@@ -64,7 +59,8 @@ const Slide = styled('div')({
     display: 'flex',
     aligntItems: 'center',
     width: '100vw',
-    height: '100vh',
+    height: '60vh',
+
 })
 
 const ImgContainer = styled('div')({
@@ -93,7 +89,7 @@ const Button = styled('button')({
 })
 
 const Img = styled('img')({
-    height: '60%',
+    height: '80%',
     padding: '50px',
 
 })

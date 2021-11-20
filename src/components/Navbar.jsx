@@ -90,7 +90,9 @@ function Navbar() {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Logo>MyShop</Logo>
+                    <Link to="/">
+                        <Logo>MyShop</Logo>
+                    </Link>
                 </Center>
                 <Right>
                     <Stack direction="row" spacing={1.5}>

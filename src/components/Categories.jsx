@@ -12,10 +12,10 @@ const Container = styled.div`
 const Categories = () => {
     return (
         <Container>
-            <Divider sx={{ marginTop: '4%', }}>
+            <Divider >
                 <Typography variant='h4'>CATEGORIES</Typography>
             </Divider>
-            <Box sx={{ display: 'flex', marginBottom: '2%' }}>
+            <Box sx={{ display: 'grid', marginBottom: '2%', gridTemplateColumns: "1fr 1fr 1fr", width: "75%", margin: "0 10% 0 10%" }}>
                 {categories.map(item => (
                     <CategoryItem item={item} key={item} />
                 ))}

@@ -14,11 +14,14 @@ const theme = createTheme({
     primary: {
       main: 'rgb(77, 89, 110)',
     },
-  },
-  typography: {
-    fontFamily: 'Signika Negative',
+    secondary: {
+      main: 'rgb(255, 255, 255)',
+    },
+    typography: {
+      fontFamily: 'Signika Negative',
+    }
   }
-})
+});
 
 
 

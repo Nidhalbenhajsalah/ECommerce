@@ -29,12 +29,24 @@ const Products = ({ cat, filters, sort }) => {
         cat && setFilteredProducts(products.filter(item => Object.entries(filters).every(([key, value]) => item[key].includes(value))))
     }, [products, cat, filters])
 
+    useEffect(() => {
+        if (sort === "newest") {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.createdAt - b.createdAt)
+            );
+        } else if (sort === "asc") {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => a.price - b.price)
+            );
+        } else {
+            setFilteredProducts((prev) =>
+                [...prev].sort((a, b) => b.price - a.price)
+            );
+        }
+    }, [sort]);
+
     return (
         <Box>
-            {/* <Typography sx={{ marginTop: '10%', justifyContent: 'center', alignItems: 'center', display: 'flex', fontSize: '40px' }}>TREND</Typography> */}
-            {/* {popularProducts.map((item) => (
-                <Product item={item} key={item.id} />
-            ))} */}
             {cat
                 ? <Product filteredProducts={filteredProducts} />
                 : <Product products={products} />
