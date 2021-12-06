@@ -8,7 +8,7 @@ import Footer from '../components/Footer'
 
 function Home() {
     return (
-        <div>
+        <div style={{ backgroundColor: 'rgb(242, 240, 240)' }}>
             <Navbar />
             <Slider />
             <Categories />

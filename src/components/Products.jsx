@@ -1,8 +1,8 @@
-import styled from 'styled-components'
-import Product from '../components/product'
-import { Box } from '@mui/system'
+
+import Product from '../components/product';
+import { Box } from '@mui/system';
 import { useState, useEffect } from 'react';
-import axios from 'axios'
+import axios from 'axios';
 
 
 const Products = ({ cat, filters, sort }) => {
@@ -18,10 +18,10 @@ const Products = ({ cat, filters, sort }) => {
                 setProducts(res.data)
             }
             catch (err) {
+                console.log(err)
 
             }
         }
-
         getproducts()
     }, [cat])
 
@@ -30,20 +30,36 @@ const Products = ({ cat, filters, sort }) => {
     }, [products, cat, filters])
 
     useEffect(() => {
+        for (let key in filters) {
+            if (filters[key] === "All Colors") {
+                setFilteredProducts(products)
+            }
+        }
+        for (let key in filters) {
+            if (filters[key] === "All Sizes") {
+                setFilteredProducts(products)
+            }
+        }
+    }, [products, filters])
+
+
+    useEffect(() => {
         if (sort === "newest") {
-            setFilteredProducts((prev) =>
-                [...prev].sort((a, b) => a.createdAt - b.createdAt)
+            setFilteredProducts((products) =>
+                [...products].sort((a, b) => a.createdAt - b.createdAt)
             );
         } else if (sort === "asc") {
-            setFilteredProducts((prev) =>
-                [...prev].sort((a, b) => a.price - b.price)
+            setFilteredProducts((products) =>
+                [...products].sort((a, b) => a.price - b.price)
             );
         } else {
-            setFilteredProducts((prev) =>
-                [...prev].sort((a, b) => b.price - a.price)
+            setFilteredProducts((products) =>
+                [...products].sort((a, b) => b.price - a.price)
             );
         }
-    }, [sort]);
+    }, [sort, products]);
+
+    console.log('filters', filters);
 
     return (
         <Box>

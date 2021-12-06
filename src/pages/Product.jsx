@@ -22,15 +22,15 @@ import Paper from '@mui/material/Paper';
 const Container = styled.div``;
 
 const Wrapper = styled.div`
-  padding: 50px;
+  padding: 5%;
   display: flex;
-  justify-content: space-between;
   align-items: center;
 
 `;
 
 const ImgContainer = styled.div`
   flex: 1;
+  width: 80%;
 `;
 
 const Image = styled.img`
@@ -43,6 +43,7 @@ const Image = styled.img`
 const InfoContainer = styled.div`
   flex: 1;
   padding: 0px 50px;
+  
 
 `;
 
@@ -59,29 +60,12 @@ const Price = styled.span`
   font-size: 40px;
 `;
 
-const FilterContainer = styled.div`
-  // width: 100%;
-  // display: flex;
-  // justify-content: space-between;
-  // margin-top: 5%;
-`;
 
 const AmountContainer = styled.div`
   display: flex;
   align-items: center;
-  font-weight: 700;
-  
-`;
 
-const Amount = styled.span`
-  width: 30px;
-  height: 30px;
-  border-radius: 10px;
-  border: 1px solid teal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin: 0px 5px;
+  
 `;
 
 
@@ -130,11 +114,11 @@ const Product = () => {
 
 
   return (
-    <Container>
+    <Container style={{ backgroundColor: 'rgb(242, 240, 240)' }}>
       <Navbar />
       <Paper elevation={6}>
-        <Wrapper>
-          <ImgContainer>
+        <Wrapper style={{ backgroundColor: 'rgb(242, 240, 240)' }}>
+          <ImgContainer >
             <Image src={product.img} />
           </ImgContainer>
           <InfoContainer>
@@ -142,8 +126,8 @@ const Product = () => {
             <Desc>
               {product.desc}
             </Desc>
-            <Price>$ {product.price}</Price>
-            <FilterContainer style={{ marginTop: "5%", display: "grid", gridTemplateColumns: "1fr 1fr 1fr 1fr 1fr", gridColumnGap: "0.5%", alignItems: "center", margin: "0 5% 0 5%" }}>
+            <Price>{product.price}.00$</Price>
+            <Box sx={{ display: "flex", justifyContent: "space-around", margin: "3vh 0 3vh 0" }} >
               <FormControl>
                 <InputLabel>Color</InputLabel>
                 <Select
@@ -158,6 +142,17 @@ const Product = () => {
                   ))}
                 </Select>
               </FormControl>
+              <AmountContainer>
+                <Remove
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("dec")} />
+                <Avatar
+                  sx={{ bgcolor: "black" }}
+                >{quantity}</Avatar>
+                <Add
+                  style={{ cursor: "pointer" }}
+                  onClick={() => handleQuantity("inc")} />
+              </AmountContainer>
               <FormControl>
                 <InputLabel>Size</InputLabel>
                 <Select
@@ -170,24 +165,14 @@ const Product = () => {
                   ))}
                 </Select>
               </FormControl>
-              <AmountContainer>
-                <Remove
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleQuantity("dec")} />
-                <Avatar
-                  sx={{ bgcolor: "black" }}
-                >{quantity}</Avatar>
-                <Add
-                  style={{ cursor: "pointer" }}
-                  onClick={() => handleQuantity("inc")} />
-              </AmountContainer>
+            </Box>
+            <Box sx={{ display: "flex", justifyContent: "center" }}>
               <Button variant="outlined" onClick={handleClick} startIcon={<AddShoppingCartIcon />} >Add</Button>
               <Button variant="outlined" onClick={handleEmptyCart} startIcon={<RemoveShoppingCartIcon />}>EMPTY</Button>
-            </FilterContainer>
+            </Box>
           </InfoContainer>
         </Wrapper>
       </Paper>
-      <Newsletter />
       <Footer />
     </Container>
   );

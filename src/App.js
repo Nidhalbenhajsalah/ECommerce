@@ -14,9 +14,9 @@ const theme = createTheme({
     primary: {
       main: 'rgb(77, 89, 110)',
     },
-    secondary: {
-      main: 'rgb(255, 255, 255)',
-    },
+    // secondary: {
+    //   main: 'rgb(255, 255, 255)',
+    // },
     typography: {
       fontFamily: 'Signika Negative',
     }
@@ -29,7 +29,7 @@ function App() {
   const user = useSelector((state) => state.user.currentUser);
   return (
 
-    <ThemeProvider theme={theme}>
+    <ThemeProvider theme={theme} >
       <Router>
         <Switch>
           <Route exact path='/'>

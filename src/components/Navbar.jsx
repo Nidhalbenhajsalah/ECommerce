@@ -15,15 +15,15 @@ import { logout } from "../redux/apiCalls";
 
 
 const Container = styled('div')({
-    marginTop: '1.5%',
-    height: '60px',
-    marginBottom: '5%'
+    backgroundColor: "white",
+    border: 'solid rgb(77, 89, 110)',
+    borderWidth: '0 0 0.5px 0',
+    alignItems: 'center',
 
 })
 
 
 const Wrapper = styled('div')({
-
     padding: '10px 20px',
     display: 'flex',
     alignItems: 'center',
@@ -81,7 +81,6 @@ function Navbar() {
 
     return (
         <Container>
-            <Divider></Divider>
             <Wrapper>
                 <Left>
                     <SearchContainer>
@@ -90,20 +89,20 @@ function Navbar() {
                     </SearchContainer>
                 </Left>
                 <Center>
-                    <Link to="/">
-                        <Logo>MyShop</Logo>
+                    <Link to="/" style={{ textDecoration: 'none' }}>
+                        <Logo style={{ color: 'rgb(77, 89, 110)' }}>MyShop</Logo>
                     </Link>
                 </Center>
                 <Right>
                     <Stack direction="row" spacing={1.5}>
                         <Button variant="outlined" startIcon={<AppRegistrationSharpIcon style={{ fontSize: '16' }} />}>Register</Button>
 
-                        <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>LOGIN</Button>
+                        {/* <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>LOGIN</Button> */}
                         <Button variant="outlined" startIcon={<AssignmentIndOutlinedIcon style={{ fontSize: '16' }} />}>LOGOUT</Button>
                     </Stack>
                     <Link to='/cart'>
                         <MenuItem>
-                            <Badge badgeContent={quantity} color="primary">
+                            <Badge badgeContent={quantity} sx={{ color: "rgb(77, 89, 110)" }}>
                                 <ShoppingCartOutlinedIcon />
                             </Badge>
                         </MenuItem>
@@ -111,7 +110,7 @@ function Navbar() {
 
                 </Right>
             </Wrapper>
-            <Divider></Divider>
+
         </Container>
     )
 }

@@ -12,8 +12,8 @@ const Container = styled.div`
 const Categories = () => {
     return (
         <Container>
-            <Divider >
-                <Typography variant='h4'>CATEGORIES</Typography>
+            <Divider sx={{ alignItems: "center" }}>
+                <Typography variant='h2'>CATEGORIES</Typography>
             </Divider>
             <Box sx={{ display: 'grid', marginBottom: '2%', gridTemplateColumns: "1fr 1fr 1fr", width: "75%", margin: "0 10% 0 10%" }}>
                 {categories.map(item => (
@@ -22,7 +22,7 @@ const Categories = () => {
 
             </Box>
             <Divider sx={{ marginTop: '15%', }}>
-                <Typography variant='h4' >TREND</Typography>
+                <Typography variant='h2' >TREND</Typography>
             </Divider>
 
         </Container >

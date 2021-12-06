@@ -5,16 +5,16 @@ import Button from '@mui/material/Button';
 
 const Container = styled('div')({
 
-  height: '60vh',
-  backgroundColor: '#f5fbfd',
+  height: '30vh',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   flexDirection: 'column',
+  backgroundColor: 'rgb(242, 240, 240)'
 })
 
 const Title = styled('h1')({
-  fontSize: '70px',
+  fontSize: '40px',
   marginBottom: '20px',
 
 })

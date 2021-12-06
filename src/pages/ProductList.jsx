@@ -5,10 +5,8 @@ import Newsletter from "../components/Newsletter";
 import Footer from "../components/Footer";
 import { useLocation } from 'react-router-dom';
 import { useState } from 'react';
-import Box from '@mui/material/Box';
-import InputLabel from '@mui/material/InputLabel';
-import MenuItem from '@mui/material/MenuItem';
-import FormControl from '@mui/material/FormControl';
+import Button from '@mui/material/Button';
+
 
 
 
@@ -18,10 +16,6 @@ const Title = styled.h1`
   margin: 20px;
 `;
 
-const FilterContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
-`;
 
 const Filter = styled.div`
   margin: 20px;
@@ -52,40 +46,46 @@ const ProductList = () => {
         const value = e.target.value;
         setFilters({
             ...filters,
-            [e.target.value]: value
+            [e.target.name]: value
         });
+
+    }
+    const resetFilters = () => {
+        setFilters({})
     }
 
+
     return (
-        <Container>
+        <Container style={{ backgroundColor: 'rgb(242, 240, 240)' }}>
             <Navbar />
 
             <Title>{cat.toUpperCase()}</Title>
 
-            <Filter>
+            <Filter >
                 <FilterText>Filter Products:</FilterText>
                 <Select name='color' onChange={handleFilters}>
-                    <Option disabled>
-                        Color
+                    <Option selected="selected">
+                        All Colors
                     </Option>
-                    <Option>White</Option>
-                    <Option>Black</Option>
-                    <Option>Red</Option>
-                    <Option>Blue</Option>
-                    <Option>Yellow</Option>
-                    <Option>Green</Option>
+                    <Option >White</Option>
+                    <Option >Black</Option>
+                    <Option >Red</Option>
+                    <Option >Blue</Option>
+                    <Option >Yellow</Option>
+                    <Option >Green</Option>
                 </Select>
                 <Select name='size' onChange={handleFilters}>
-                    <Option disabled>
-                        Size
+                    <Option selected="selected">
+                        All Sizes
                     </Option>
-                    <Option>XS</Option>
-                    <Option>S</Option>
-                    <Option>M</Option>
-                    <Option>L</Option>
-                    <Option>XL</Option>
+                    <Option >XS</Option>
+                    <Option >S</Option>
+                    <Option >M</Option>
+                    <Option >L</Option>
+                    <Option >XL</Option>
                 </Select>
             </Filter>
+            <Button onClick={resetFilters}>Reset Filters</Button>
             <Filter>
                 <FilterText>Sort Products:</FilterText>
                 <Select onChange={(e) => setSort(e.target.value)}>
