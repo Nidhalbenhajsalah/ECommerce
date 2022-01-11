@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Product from './pages/Product';
 import ProductList from './pages/ProductList';
 import Register from './pages/Register';
+import Admin from './pages/Admin';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { BrowserRouter as Router, Switch, Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
@@ -51,6 +52,9 @@ function App() {
           <Route path='/register'>
             {user ? <Redirect to="/" /> : <Register />}
             <Register />
+          </Route>
+          <Route path='/admin'>
+            <Admin />
           </Route>
         </Switch>
       </Router>

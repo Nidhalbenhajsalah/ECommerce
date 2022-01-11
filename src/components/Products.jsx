@@ -42,6 +42,11 @@ const Products = ({ cat, filters, sort }) => {
         }
     }, [products, filters])
 
+    useEffect(() => {
+        products.map(item =>
+            console.log(item.color, item.size))
+    })
+
 
     useEffect(() => {
         if (sort === "newest") {
@@ -58,8 +63,6 @@ const Products = ({ cat, filters, sort }) => {
             );
         }
     }, [sort, products]);
-
-    console.log('filters', filters);
 
     return (
         <Box>

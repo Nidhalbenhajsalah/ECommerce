@@ -49,6 +49,9 @@ const Product = ({ filteredProducts, products }) => {
                   Available Colors:<br /> {item.color.map((color) => (
                     <Item sx={{ backgroundColor: color, height: "5px" }}></Item>
                   ))}
+                  Available Sizes:<br /> {item.size.map((size) => (
+                    <Item sx={{ height: "5px" }}>{size}</Item>
+                  ))}
                 </Stack>
               </CardContent>
               <CardActions sx={{ justifyContent: "space-evenly" }}>
